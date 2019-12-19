@@ -1,0 +1,7 @@
+AUX_SOURCE_DIRECTORY(. SOURCE_FILES)
+
+SET(
+    SOURCE_FILES test.cpp
+    )
+
+ADD_EXECUTABLE(test_actor ${SOURCE_FILES})

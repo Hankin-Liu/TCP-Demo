@@ -1,0 +1,58 @@
+{
+    "desc1": "线程配置",
+    "threads":[
+        {
+            "desc": "线程1, polling_ms=-1有事件才唤醒",
+            "name": "thread1",
+            "polling_ms": -1
+        },
+        {
+            "desc": "线程2, polling_ms=-1有事件才唤醒",
+            "name": "thread2",
+            "polling_ms": -1
+        },
+        {
+            "desc": "线程3, polling_ms=-1有事件才唤醒",
+            "name": "thread3",
+            "polling_ms": -1
+        }
+    ],
+
+    "desc2": "actor配置",
+    "actors":[
+        {
+            "desc": "actor 0, actor_type=0代表是管理类actor; thread_name=thread1挂在线程1上跑; heartbeat_frequency_ms=100代表100毫秒探测一次心跳; monitored_actor_ids=1,2代表管理actor1和actor2",
+            "id": 0,
+            "actor_type": 0,
+            "thread_name": "thread1",
+            "heartbeat_frequency_ms" : 100,
+            "monitored_actor_ids": [1, 2]
+        },
+        {
+            "desc": "actor 1, actor_type=1代表是普通类actor; thread_name=thread2挂在线程2上跑;",
+            "id": 1,
+            "actor_type": 1,
+            "thread_name": "thread2",
+            "func_code_to_actors": [
+                {
+                    "desc": "发包时,功能码99999的数据包发给actor2,在此demo程序中没有用,只是举个例子",
+                    "func_code": 99999,
+                    "actor_ids": [2]
+                }
+            ]
+        },
+        {
+            "desc": "actor 2, actor_type=2代表是TCP类actor; thread_name=thread3挂在线程3上跑; address为IP端口;mode=1代表TCP连接端,有自动重连机制;bind_actor_id=1代表此TCP收到的数据转给actor1处理; output_buffer_size代表每根TCP输出缓存大小;keepalive为TCP保活机制",
+            "id": 2,
+            "actor_type": 2,
+            "thread_name": "thread3",
+            "address": "127.0.0.1:9000",
+            "mode": 1,
+            "bind_actor_id": 1,
+            "output_buffer_size": 1024,
+            "keepalive": -1,
+            "func_code_to_actors": [
+            ]
+        }
+    ]
+}

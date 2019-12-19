@@ -1,0 +1,18 @@
+PROJECT(test_actor)
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+SET(CMAKE_CXX_COMPILER "g++")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb -pthread")
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall -pthread")
+SET(CMAKE_BUILD_TYPE "Debug")
+
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+
+LINK_LIBRARIES("${PROJECT_SOURCE_DIR}/../../../../../../lib/libActor.a")
+
+add_definitions(-std=c++11)
+
+INCLUDE_DIRECTORIES(../../../../../../include)
+
+ADD_SUBDIRECTORY(src)
